@@ -1,56 +1,77 @@
-from sql_alchemy import banco
+from sql_alchemy import db
+from datetime import datetime
 
 
-class HotelModel(banco.Model):
+class EventModel(db.Model):
+    __tablename__ = 'event'
+    name = db.Column(db.String(80), primary_key=True)
+    # url friendly version of name
+    slug = db.Column(db.String(80))
+    # Either true or false
+    active = db.Column(db.Boolean)
+    # Either preplay or inplay
+    type = db.Column(db.String(80))
+    sport = db.Column(db.String(80), primary_key=True)
+    # Pending, Started, Ended or Cancelled
+    status = db.Column(db.String(10))
+    # UTC datetime
+    scheduled_start = db.Column(db.DateTime)
+    # created at the time the event has the status changed to "Started"
+    actual_start = db.Column(db.DateTime)
 
-    __tablename__ = 'hoteis'
-    hotel_id = banco.Column(banco.String, primary_key=True)
-    nome = banco.Column(banco.String(80))
-    estrelas = banco.Column(banco.Float(precision=1))
-    diaria = banco.Column(banco.Float(precision=2))
-    cidade = banco.Column(banco.String(40))
+    def __init__(self, name, slug, active, type, sport, status, scheduled_start, actual_start):
 
-    def __init__(self, hotel_id, nome, estrelas, diaria, cidade):
-        self.hotel_id = hotel_id
-        self.nome = nome
-        self.estrelas = estrelas
-        self.diaria = diaria
-        self.cidade = cidade
+        self.name = name
+        self.slug = slug
+        self.active = active
+        self.type = type
+        self.sport = sport
+        self.status = status
+        self.scheduled_start = datetime.strptime(scheduled_start, '%d-%m-%Y %H:%M:%S')
+        self.actual_start = datetime.strptime(actual_start, '%d-%m-%Y %H:%M:%S')
 
     def json(self):
+
         return {
-            'hotel_id': self.hotel_id,
-            'nome': self.nome,
-            'estrelas': self.estrelas,
-            'diaria': self.diaria,
-            'cidade': self.cidade,
+            'name': self.name,
+            'slug': self.slug,
+            'active': self.active,
+            'type': self.type,
+            'sport': self.sport,
+            'status': self.status,
+            'scheduled_start': self.scheduled_start.strftime('%d-%m-%Y %H:%M:%S'),
+            'actual_start': self.actual_start.strftime('%d-%m-%Y %H:%M:%S')
         }
 
     @classmethod
-    def find_hotel(cls, hotel_id):
+    def find_event(cls, name):
 
-        hotel = cls.query.filter_by(hotel_id=hotel_id).first()
+        event = cls.query.filter_by(name=name).first()
 
-        if hotel:
-            return hotel
+        if event:
+            return event
         return None
 
-    def save_hotel(self):
+    def save_event(self):
         try:
-            banco.session.add(self)
-            banco.session.commit()
-        except:
-            return {'message': 'An internal error ocurred trying to save hotel'}, 500
+            db.session.add(self)
+            db.session.commit()
+        except(Exception,):
+            return {'message': 'An internal error ocurred trying to save event'}, 500
 
-    def update_hotel(self, nome, estrelas, diaria, cidade):
-        self.nome = nome
-        self.estrelas = estrelas
-        self.diaria = diaria
-        self.cidade = cidade
+    def update_event(self, name, slug, active, type, sport, status, scheduled_start, actual_start):
+        self.name = name
+        self.slug = slug
+        self.active = active
+        self.type = type
+        self.sport = sport
+        self.status = status
+        self.scheduled_start = datetime.strptime(scheduled_start, '%d-%m-%Y %H:%M:%S')
+        self.actual_start = datetime.strptime(actual_start, '%d-%m-%Y %H:%M:%S')
 
-    def delete_hotel(self):
+    def delete_event(self):
         try:
-            banco.session.delete(self)
-            banco.session.commit()
-        except:
-            return {'message': 'An internal error ocurred trying to save hotel'}, 500
+            db.session.delete(self)
+            db.session.commit()
+        except(Exception,):
+            return {'message': 'An internal error ocurred trying to delete event'}, 500
