@@ -27,10 +27,17 @@ class EventModel(db.Model):
         self.type = type
         self.sport = sport
         self.status = status
-        self.scheduled_start = datetime.strptime(scheduled_start, '%d-%m-%Y %H:%M:%S')
-        self.actual_start = datetime.strptime(actual_start, '%d-%m-%Y %H:%M:%S')
+        self.scheduled_start = datetime.strptime(scheduled_start, '%Y-%m-%d %H:%M:%S')
+        if status.upper() == 'STARTED':
+            self.actual_start = datetime.now()
+        else:
+            self.actual_start = actual_start
 
     def json(self):
+
+        actual_start = self.actual_start
+        if self.actual_start:
+            actual_start = self.actual_start.strftime('%Y-%m-%d %H:%M:%S')
 
         return {
             'name': self.name,
@@ -39,14 +46,14 @@ class EventModel(db.Model):
             'type': self.type,
             'sport': self.sport,
             'status': self.status,
-            'scheduled_start': self.scheduled_start.strftime('%d-%m-%Y %H:%M:%S'),
-            'actual_start': self.actual_start.strftime('%d-%m-%Y %H:%M:%S')
+            'scheduled_start': self.scheduled_start.strftime('%Y-%m-%d %H:%M:%S'),
+            'actual_start': actual_start
         }
 
     @classmethod
-    def find_event(cls, name):
+    def find_event(cls, name, sport):
 
-        event = cls.query.filter_by(name=name).first()
+        event = cls.query.filter_by(name=name, sport=sport).first()
 
         if event:
             return event
@@ -66,8 +73,11 @@ class EventModel(db.Model):
         self.type = type
         self.sport = sport
         self.status = status
-        self.scheduled_start = datetime.strptime(scheduled_start, '%d-%m-%Y %H:%M:%S')
-        self.actual_start = datetime.strptime(actual_start, '%d-%m-%Y %H:%M:%S')
+        self.scheduled_start = datetime.strptime(scheduled_start, '%Y-%m-%d %H:%M:%S')
+        if status.upper() == 'STARTED':
+            self.actual_start = datetime.now()
+        else:
+            self.actual_start = actual_start
 
     def delete_event(self):
         try:

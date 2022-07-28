@@ -28,9 +28,9 @@ class SelectionModel(db.Model):
         }
 
     @classmethod
-    def find_selection(cls, name):
+    def find_selection(cls, name, event):
 
-        selection = cls.query.filter_by(name=name).first()
+        selection = cls.query.filter_by(name=name, event=event).first()
 
         if selection:
             return selection

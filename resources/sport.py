@@ -21,7 +21,7 @@ class Sport(Resource):
             return sport.json(), 200
         return {'message': 'Sport name {} not found.'.format(name)}, 404
 
-    #@jwt_required()
+    @jwt_required()
     def post(self, name):
 
         if SportModel.find_sport(name):
@@ -35,7 +35,7 @@ class Sport(Resource):
             return {'message': 'An internal error ocurred trying to save sport'}, 500
         return new_sport.json(), 201
 
-    #@jwt_required()
+    @jwt_required()
     def put(self, name):
 
         data = Sport.args.parse_args()
@@ -50,12 +50,16 @@ class Sport(Resource):
         new_sport.save_sport()
         return new_sport.json(), 201
 
-    #@jwt_required()
+    @jwt_required()
     def delete(self, name):
 
         sport = SportModel.find_sport(name)
+        sport.active = 0
 
         if sport:
-            sport.delete_sport()
-            return {'message': 'Sport deleted'}, 200
+            sport.save_sport()
+            return {'message': 'Sport inactivate'}, 200
         return {'message': 'Sport not found'}, 404
+
+
+

@@ -4,6 +4,23 @@ from flask_jwt_extended import jwt_required
 import sqlite3
 
 
+def check_inactivate_event(name):
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    query = "UPDATE event SET active = 0 " \
+            "WHERE name = '" + name + "' " \
+            "AND NOT EXISTS ( " \
+            "   SELECT * FROM selection s " \
+            "WHERE s.event = '" + name + "' " \
+            "AND s.active = 1 )"
+
+    cursor.execute(query)
+    conn.commit()
+    cursor.close()
+
+
 class Selection(Resource):
     args = reqparse.RequestParser()
     args.add_argument('event', type=str)
@@ -11,20 +28,21 @@ class Selection(Resource):
     args.add_argument('active', type=bool)
     args.add_argument('outcome', type=str)
 
-    def get(self, name):
+    def get(self, name, event):
 
-        selection = SelectionModel.find_selection(name)
+        selection = SelectionModel.find_selection(name, event)
         if selection:
             return selection.json(), 200
         return {'message': 'Selection name {} not found.'.format(name)}, 404
 
     #@jwt_required()
-    def post(self, name):
-
-        if SelectionModel.find_selection(name):
-            return {'message': 'Selection name {} already exists.'.format(name)}, 400
+    def post(self, name, event):
 
         data = Selection.args.parse_args()
+
+        if SelectionModel.find_selection(name, event):
+            return {'message': 'Selection name {} already exists.'.format(name)}, 400
+
         new_selection = SelectionModel(name, **data)
         try:
             new_selection.save_selection()
@@ -33,10 +51,10 @@ class Selection(Resource):
         return new_selection.json(), 201
 
     #@jwt_required()
-    def put(self, name):
+    def put(self, name, event):
 
         data = Selection.args.parse_args()
-        selection = SelectionModel.find_selection(name)
+        selection = SelectionModel.find_selection(name, event)
 
         if selection:
             selection.update_selection(name, **data)
@@ -48,11 +66,15 @@ class Selection(Resource):
         return selection.json(), 201
 
     #@jwt_required()
-    def delete(self, name):
+    def delete(self, name, event):
 
-        selection = SelectionModel.find_selection(name)
+        selection = SelectionModel.find_selection(name, event)
+        selection.active = 0
 
         if selection:
-            selection.delete_selection()
-            return {'message': 'Selection deleted'}, 200
+            selection.save_selection()
+            check_inactivate_event(event)
+            return {'message': 'Selection inactivate'}, 200
         return {'message': 'Selection not found'}, 404
+
+

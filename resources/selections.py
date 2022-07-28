@@ -39,8 +39,6 @@ class Selections(Resource):
 
         query = "SELECT * FROM selection" + where
 
-        print(query)
-
         tupla = tuple([data[key] for key in data])
         result = cursor.execute(query, tupla)
 
