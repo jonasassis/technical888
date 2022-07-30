@@ -6,7 +6,7 @@ from resources.event import Event
 from resources.events import Events
 from resources.selection import Selection
 from resources.selections import Selections
-from resources.usuario import User, UserRegister, UserLogin, UserLogout
+from resources.user import User, UserRegister, UserLogin, UserLogout
 from resources.displays import SportsMin, EventsSports, Display
 from flask_jwt_extended import JWTManager
 from blacklist import BLACKLIST
@@ -16,6 +16,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'DontTellAnyone'
 app.config['JWT_BLACKLIST_ENABLED'] = True
+app.config['SWAGGER'] = {"title": "Swagger-UI"}
+
 
 api = Api(app)
 jwt = JWTManager(app)

@@ -63,7 +63,7 @@ class Selection(Resource):
 
         new_selection = SelectionModel(name, **data)
         new_selection.save_selection()
-        return selection.json(), 201
+        return new_selection.json(), 201
 
     #@jwt_required()
     def delete(self, name, event):
