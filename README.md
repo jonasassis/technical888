@@ -61,3 +61,28 @@ technical888/
     ```
     python run.py
     ```
+    
+# API Documentation
+
+## Sports
+
+- Return all sports
+``` GET
+
+|Method         |URL                         |
+|---------------|----------------------------|
+| `GET`         |/sports                     |
+
+##### Table of Contents  
+[Headers](#headers)  
+[Emphasis](#emphasis)  
+...snip...    
+<a name="headers"/>
+## Headers
+
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
