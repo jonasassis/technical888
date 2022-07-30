@@ -6,10 +6,11 @@ In this document, you can find details about **FILES**, **INSTALL INSTRUCTIONS**
 - [API Documentation](README.md#api-documentation)
 - - [Sports](README.md#sports)
 - - [Events](README.md#events)
+- - [Selections](README.md#selections)
 
 # Project
 
-**FILE: exercise1.py**
+**FILE:** [exercise1](exercise1.py)
 
 This code is composed of two different solutions:
 ```
@@ -20,7 +21,7 @@ This code is composed of two different solutions:
 
 **REST Application**
 
-This project consists of a sportsbook product which is responsible for managing **sports**, **events** and **selections**.
+This project consists of a sportsbook product which is responsible for managing **sports**, **events** and **selections** with layer for **users** security.
 ```
 technical888/
     ├── models
@@ -204,7 +205,6 @@ technical888/
 }
  ```
 
-
 ## Events
 
 - Return all events
@@ -293,7 +293,7 @@ technical888/
     "actual_start": null
 }
  ```
-> **404 NOT FOUND** | curl --request GET 'http://127.0.0.1:5000/sports/Nadal ax Rafael/TENNIS'
+> **404 NOT FOUND** | curl --request GET 'http://127.0.0.1:5000/events/Nadal ax Rafael/TENNIS'
 
 ```json
 {
@@ -330,7 +330,7 @@ technical888/
     "scheduled_start": "2022-08-30 20:00:00"
 }
  ```
-> **400 BAD REQUEST** | curl --request POST 'http://127.0.0.1:5000/sports/RUGBY' \
+> **400 BAD REQUEST** | curl --request POST 'http://127.0.0.1:5000/events/Alan x Michael/TENNIS' \
 --header 'Authorization: Bearer <access_token>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -349,13 +349,13 @@ technical888/
 }
  ```
 
- - Update or new sport
+ - Update or new Events
 
 | Method | URL                    | Filters         | Authorization |
 |--------|------------------------|-----------------|---------------|
 | `PUT`  | /events/{name}/{sport} | No filters      | Authorization |
 
-> **200 OK** | curl --request POST 'http://127.0.0.1:5000/events/Alan x Michael/TENNIS' \
+> **200 OK** | curl --request PUT 'http://127.0.0.1:5000/events/Alan x Michael/TENNIS' \
 --header 'Authorization: Bearer <access_token>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -407,7 +407,7 @@ technical888/
 }
  ```
 
- - Delete (inactive) Sport
+ - Delete (inactive) Event
 
 | Method   | URL                    | Filters         | Authorization |
 |----------|------------------------|-----------------|---------------|
@@ -419,5 +419,173 @@ technical888/
 ```json
 {
     "message": "Event inactivate"
+}
+ ```
+
+## Selections
+
+- Return selections
+
+| Method | URL         | Filters                  | Authorization |
+|--------|-------------|--------------------------|---------------|
+| `GET`  | /selections | event \ outcome \ active | No            |
+
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/selections?event=%Internazionale%&active=True'
+
+```json
+{
+    "selections": [
+        {
+            "name": "1",
+            "event": "Internazionale x Liverpol",
+            "price": 1.2,
+            "active": 1,
+            "outcome": "Unsettled"
+        },
+        {
+            "name": "2",
+            "event": "Internazionale x Liverpol",
+            "price": 4.9,
+            "active": 1,
+            "outcome": "Unsettled"
+        },
+        {
+            "name": "X",
+            "event": "Internazionale x Liverpol",
+            "price": 8.0,
+            "active": 1,
+            "outcome": "Unsettled"
+        }
+    ]
+}
+ ```
+ 
+ - Return specific selection
+
+
+| Method        | URL                        | Filters         | Authorization |
+|---------------|----------------------------|-----------------|---------------|
+| `GET`         | /selections/{name}/{event} | No filters      | No            |
+
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/selections/X/Internazionale x Liverpol'
+
+```json
+{
+    "name": "X",
+    "event": "Internazionale x Liverpol",
+    "price": 8.0,
+    "active": true,
+    "outcome": "Unsettled"
+}
+ ```
+> **404 NOT FOUND** | curl --request GET 'http://127.0.0.1:5000/selections/SX/Internazionale x Liverpol'
+
+```json
+{
+    "message": "Selection name SX not found."
+}
+ ```
+
+ - Insert new selection
+
+| Method | URL                        | Filters         | Authorization |
+|--------|----------------------------|-----------------|---------------|
+| `POST` | /selections/{name}/{event} | No filters      | Required      |
+
+> **200 OK** | curl --request POST 'http://127.0.0.1:5000/selections/X/Michael x Stace' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "X",
+    "event": "Michael x Stace",
+    "price": 3.7,
+    "active": 1,
+    "outcome": "Unsettled"
+}'
+```json
+{
+    "name": "X",
+    "event": "Michael x Stace",
+    "price": 3.7,
+    "active": true,
+    "outcome": "Unsettled"
+}
+ ```
+> **400 BAD REQUEST** | curl --request POST 'http://127.0.0.1:5000/selections/X/Michael x Stace' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "X",
+    "event": "Michael x Stace",
+    "price": 3.7,
+    "active": 1,
+    "outcome": "Unsettled"
+}'
+
+```json
+{
+    "message": "Selection name X already exists."
+}
+ ```
+
+ - Update or new selection
+
+| Method | URL                        | Filters         | Authorization |
+|--------|----------------------------|-----------------|---------------|
+| `PUT`  | /selections/{name}/{event} | No filters      | Authorization |
+
+> **200 OK** | curl --request PUT 'http://127.0.0.1:5000/selections/X/Michael x Stace' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "X",
+    "event": "Michael x Stace",
+    "price": 7.9,
+    "active": 1,
+    "outcome": "Unsettled"
+}'
+
+```json
+{
+    "name": "X",
+    "event": "Michael x Stace",
+    "price": 7.9,
+    "active": true,
+    "outcome": "Unsettled"
+}
+ ```
+> **201 CREATED** | curl --request PUT 'http://127.0.0.1:5000/selections/2/Michael x Stace' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "2",
+    "event": "Michael x Stace",
+    "price": 7.9,
+    "active": 1,
+    "outcome": "Unsettled"
+}'
+
+```json
+{
+    "name": "2",
+    "event": "Michael x Stace",
+    "price": 7.9,
+    "active": true,
+    "outcome": "Unsettled"
+}
+ ```
+
+ - Delete (inactive) Selection
+
+| Method   | URL                        | Filters         | Authorization |
+|----------|----------------------------|-----------------|---------------|
+| `DELETE` | /selections/{name}/{event} | No filters      | Required      |
+
+> **200 OK** | curl --request DELETE 'http://127.0.0.1:5000/selections/3/Michael x Stace' \
+--header 'Authorization: Bearer <access_token>'
+
+```json
+{
+    "message": "Selection inactivate"
 }
  ```
