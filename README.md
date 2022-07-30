@@ -67,22 +67,45 @@ technical888/
 ## Sports
 
 - Return all sports
-``` GET
 
-|Method         |URL                         |
-|---------------|----------------------------|
-| `GET`         |/sports                     |
+| Method        | URL                         | Filters         |
+|---------------|-----------------------------|-----------------|
+| `GET`         | /sports                     | name \| active  |
 
-##### Table of Contents  
-[Headers](#headers)  
-[Emphasis](#emphasis)  
-...snip...    
-<a name="headers"/>
-## Headers
+> **200 OK** | curl --location --request GET 'http://127.0.0.1:5000/sports?name=%FOOT%&active=1'
 
+```json
+{"sports": 
+    [
+        {
+            "name": "FOOTBALL",
+            "slug": "FOOTBALL30",
+            "active": 1
+        }
+     ]
+ } 
+ ```
+ 
+ - Return just one sport
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| Method        | URL                         | Filters         |
+|---------------|-----------------------------|-----------------|
+| `GET`         | /sports/<name>              | No filters      |
+
+> **200 OK** | curl --location --request GET 'http://127.0.0.1:5000/sports/BASKETBALL'
+
+```json
+{
+    "name": "BASKETBALL",
+    "slug": "BASKETBALL",
+    "active": true
+}
+ ```
+> **404 NOT FOUND** | curl --location --request GET 'http://127.0.0.1:5000/sports/BASKETBSSALL'
+
+```json
+{
+    "message": "Sport name BASKETBSSALL not found."
+}
+ ```
+
