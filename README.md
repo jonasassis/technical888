@@ -2,7 +2,10 @@
 
 In this document, you can find details about **FILES**, **INSTALL INSTRUCTIONS** and **API documentation**.
 
-[Install and run locally](README.md#install-and-run-locally)
+- [Install and run locally](README.md#install-and-run-locally) <br>
+- [API Documentation](README.md#api-documentation)
+- - [Sports](README.md#sports)
+- - [Events](README.md#events)
 
 # Project
 
@@ -68,11 +71,11 @@ technical888/
 
 - Return all sports
 
-| Method        | URL                         | Filters         |
-|---------------|-----------------------------|-----------------|
-| `GET`         | /sports                     | name \| active  |
+| Method        | URL                         | Filters         | Authorization |
+|---------------|-----------------------------|-----------------|---------------|
+| `GET`         | /sports                     | name \ active   | NO            |
 
-> **200 OK** | curl --location --request GET 'http://127.0.0.1:5000/sports?name=%FOOT%&active=1'
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/sports?name=%FOOT%&active=1'
 
 ```json
 {"sports": 
@@ -88,11 +91,11 @@ technical888/
  
  - Return just one sport
 
-| Method        | URL            | Filters         |
-|---------------|----------------|-----------------|
-| `GET`         | /sports/{name} | No filters      |
+| Method        | URL            | Filters         | Authorization |
+|---------------|----------------|-----------------|---------------|
+| `GET`         | /sports/{name} | No filters      | NO            |
 
-> **200 OK** | curl --location --request GET 'http://127.0.0.1:5000/sports/BASKETBALL'
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/sports/BASKETBALL'
 
 ```json
 {
@@ -101,7 +104,7 @@ technical888/
     "active": true
 }
  ```
-> **404 NOT FOUND** | curl --location --request GET 'http://127.0.0.1:5000/sports/BASKETBSSALL'
+> **404 NOT FOUND** | curl --request GET 'http://127.0.0.1:5000/sports/BASKETBSSALL'
 
 ```json
 {
@@ -111,11 +114,11 @@ technical888/
 
  - Insert new sport
 
-| Method | URL             | Filters         |
-|--------|-----------------|-----------------|
-| `POST` | /sports/{name}  | No filters      |
+| Method | URL             | Filters         | Authorization |
+|--------|-----------------|-----------------|---------------|
+| `POST` | /sports/{name}  | No filters      | Required      |
 
-> **200 OK** | curl --location --request POST 'http://127.0.0.1:5000/sports/VOLEYBALL' \
+> **200 OK** | curl --request POST 'http://127.0.0.1:5000/sports/VOLEYBALL' \
 --header 'Authorization: Bearer <access_token>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -132,7 +135,7 @@ technical888/
     "active": true
 }
  ```
-> **400 BAD REQUEST** | curl --location --request POST 'http://127.0.0.1:5000/sports/RUGBY' \
+> **400 BAD REQUEST** | curl --request POST 'http://127.0.0.1:5000/sports/RUGBY' \
 --header 'Authorization: Bearer <access_token>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -149,11 +152,11 @@ technical888/
 
  - Update or new sport
 
-| Method | URL             | Filters         |
-|--------|-----------------|-----------------|
-| `PUT`  | /sports/{name}  | No filters      |
+| Method | URL             | Filters         | Authorization |
+|--------|-----------------|-----------------|---------------|
+| `PUT`  | /sports/{name}  | No filters      | Required      |
 
-> **200 OK** | curl --location --request PUT 'http://127.0.0.1:5000/sports/VOLEYBALL' \
+> **200 OK** | curl --request PUT 'http://127.0.0.1:5000/sports/VOLEYBALL' \
 --header 'Authorization: Bearer <access_token>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -169,7 +172,7 @@ technical888/
     "active": 1
 }
  ```
-> **201 CREATED** | curl --location --request PUT 'http://127.0.0.1:5000/sports/VOLEYBALL888' \
+> **201 CREATED** | curl --request PUT 'http://127.0.0.1:5000/sports/VOLEYBALL888' \
 --header 'Authorization: Bearer <access_token>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -188,15 +191,233 @@ technical888/
 
  - Delete (inactive) Sport
 
-| Method   | URL             | Filters         |
-|----------|-----------------|-----------------|
-| `DELETE` | /sports/{name}  | No filters      |
+| Method   | URL             | Filters         | Authorization |
+|----------|-----------------|-----------------|---------------|
+| `DELETE` | /sports/{name}  | No filters      | Required      |
 
-> **200 OK** | curl --location --request DELETE 'http://127.0.0.1:5000/sports/VOLEYBALL888' \
+> **200 OK** | curl --request DELETE 'http://127.0.0.1:5000/sports/VOLEYBALL888' \
 --header 'Authorization: Bearer <access_token>'
 
 ```json
 {
     "message": "Sport inactivate"
+}
+ ```
+
+
+## Events
+
+- Return all events
+
+| Method | URL     | Filters               | Authorization |
+|--------|---------|-----------------------|---------------|
+| `GET`  | /events | name \ active \ sport | No            |
+
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/events'
+
+```json
+{
+    "events": [
+        {
+            "name": "Internazionale x Liverpol",
+            "slug": "EUROPE LEAGUE",
+            "active": 1,
+            "type": "preplay",
+            "sport": "FOOTBALL",
+            "status": "Pending",
+            "scheduled_start": "2022-07-30 20:00:00.000000",
+            "actual_start": null
+        },
+        {
+            "name": "Barcelona x Real Madrid",
+            "slug": "EUROPE LEAGUE",
+            "active": 1,
+            "type": "preplay",
+            "sport": "FOOTBALL",
+            "status": "Pending",
+            "scheduled_start": "2022-07-30 20:00:00.000000",
+            "actual_start": null
+        },
+        {
+            "name": "Chelsea x Real Madrid",
+            "slug": "EUROPE LEAGUE",
+            "active": 1,
+            "type": "preplay",
+            "sport": "FOOTBALL",
+            "status": "Pending",
+            "scheduled_start": "2022-07-30 20:00:00.000000",
+            "actual_start": null
+        },
+        {
+            "name": "Nadal x Rafael",
+            "slug": "Nadal x Rafael 316",
+            "active": 1,
+            "type": "preplay",
+            "sport": "TENNIS",
+            "status": "Pending",
+            "scheduled_start": "2022-08-30 20:00:00.000000",
+            "actual_start": null
+        },
+        {
+            "name": "Mick x Fiona",
+            "slug": "WORLD TENNIS",
+            "active": 0,
+            "type": "preplay",
+            "sport": "TENNIS",
+            "status": "Pending",
+            "scheduled_start": "2022-08-30 20:00:00.000000",
+            "actual_start": null
+        }
+    ]
+}
+ ```
+ 
+ - Return specific event
+
+
+| Method        | URL                    | Filters         | Authorization |
+|---------------|------------------------|-----------------|---------------|
+| `GET`         | /events/{name}/{sport} | No filters      | No            |
+
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/events/Nadal x Rafael/TENNIS'
+
+```json
+{
+    "name": "Nadal x Rafael",
+    "slug": "Nadal x Rafael 316",
+    "active": true,
+    "type": "preplay",
+    "sport": "TENNIS",
+    "status": "Pending",
+    "scheduled_start": "2022-08-30 20:00:00",
+    "actual_start": null
+}
+ ```
+> **404 NOT FOUND** | curl --request GET 'http://127.0.0.1:5000/sports/Nadal ax Rafael/TENNIS'
+
+```json
+{
+    "message": "Event name Nadal ax Rafael not found."
+}
+ ```
+
+ - Insert new event
+
+| Method | URL                    | Filters         | Authorization |
+|--------|------------------------|-----------------|---------------|
+| `POST` | /events/{name}/{sport} | No filters      | Required      |
+
+> **200 CREATED** | curl --request POST 'http://127.0.0.1:5000/events/Alan x Michael/TENNIS' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Mick x Fiona",
+    "slug": "WORLD TENNIS",
+    "active": 1,
+    "type": "preplay",
+    "sport": "TENNIS",
+    "status": "Pending",
+    "scheduled_start": "2022-08-30 20:00:00"
+}'
+```json
+{
+    "name": "Mick x Fiona",
+    "slug": "WORLD TENNIS",
+    "active": 1,
+    "type": "preplay",
+    "sport": "TENNIS",
+    "status": "Pending",
+    "scheduled_start": "2022-08-30 20:00:00"
+}
+ ```
+> **400 BAD REQUEST** | curl --request POST 'http://127.0.0.1:5000/sports/RUGBY' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Mick x Fiona",
+    "slug": "WORLD TENNIS",
+    "active": 1,
+    "type": "preplay",
+    "sport": "TENNIS",
+    "status": "Pending",
+    "scheduled_start": "2022-08-30 20:00:00"
+}'
+
+```json
+{
+    "message": "Event name Alan x Michael already exists."
+}
+ ```
+
+ - Update or new sport
+
+| Method | URL                    | Filters         | Authorization |
+|--------|------------------------|-----------------|---------------|
+| `PUT`  | /events/{name}/{sport} | No filters      | Authorization |
+
+> **200 OK** | curl --request POST 'http://127.0.0.1:5000/events/Alan x Michael/TENNIS' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Alan x Michael",
+    "slug": "WORLD TENNIS",
+    "active": 1,
+    "type": "preplay",
+    "sport": "TENNIS",
+    "status": "Started",
+    "scheduled_start": "2022-08-30 20:00:00"
+}'
+
+```json
+{
+    "name": "Alan x Michael",
+    "slug": "WORLD TENNIS",
+    "active": true,
+    "type": "preplay",
+    "sport": "TENNIS",
+    "status": "Started",
+    "scheduled_start": "2022-08-30 20:00:00",
+    "actual_start": "2022-07-30 16:01:04"
+}
+ ```
+> **201 CREATED** | curl --request PUT 'http://127.0.0.1:5000/events/Oliveira x Michael/TENNIS' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Oliveira x Michael",
+    "slug": "WORLD TENNIS",
+    "active": 1,
+    "type": "preplay",
+    "sport": "TENNIS",
+    "status": "Started",
+    "scheduled_start": "2022-08-30 20:00:00",
+    "actual_start": null
+}'
+
+```json
+{
+    "name": "Oliveira x Michael",
+    "slug": "WORLD TENNIS",
+    "active": true,
+    "type": "preplay",
+    "sport": "TENNIS",
+    "status": "Started",
+    "scheduled_start": "2022-08-30 20:00:00",
+    "actual_start": "2022-07-30 16:02:21"
+}
+ ```
+
+ - Delete (inactive) Sport
+
+| Method   | URL                    | Filters         | Authorization |
+|----------|------------------------|-----------------|---------------|
+| `DELETE` | /events/{name}/{sport} | No filters      | Required      |
+
+> **200 OK** | curl --request DELETE 'http://127.0.0.1:5000/events/Oliveira x Michael/TENNIS' \
+--header 'Authorization: Bearer <access_token>'
+
+```json
+{
+    "message": "Event inactivate"
 }
  ```
