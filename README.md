@@ -109,3 +109,39 @@ technical888/
 }
  ```
 
+ - Insert new sport
+
+| Method | URL                         | Filters         |
+|--------|-----------------------------|-----------------|
+| `POST` | /sports/<name>              | No filters      |
+
+> **200 OK** | curl --location --request POST 'http://127.0.0.1:5000/sports/VOLEYBALL' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "VOLEYBALL",
+    "slug": "VOLEYBALL",
+    "active": true
+}'
+```json
+{
+    "name": "VOLEYBALL",
+    "slug": "VOLEYBALL",
+    "active": true
+}
+ ```
+> **400 BAD REQUEST** | curl --location --request POST 'http://127.0.0.1:5000/sports/RUGBY' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "RUGBY",
+    "slug": "RUGBY",
+    "active": true
+}'
+
+```json
+{
+    "message": "Sport name RUGBY already exists."
+}
+ ```
+
