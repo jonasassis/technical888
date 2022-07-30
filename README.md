@@ -88,9 +88,9 @@ technical888/
  
  - Return just one sport
 
-| Method        | URL                         | Filters         |
-|---------------|-----------------------------|-----------------|
-| `GET`         | /sports/<name>              | No filters      |
+| Method        | URL            | Filters         |
+|---------------|----------------|-----------------|
+| `GET`         | /sports/{name} | No filters      |
 
 > **200 OK** | curl --location --request GET 'http://127.0.0.1:5000/sports/BASKETBALL'
 
@@ -111,9 +111,9 @@ technical888/
 
  - Insert new sport
 
-| Method | URL                         | Filters         |
-|--------|-----------------------------|-----------------|
-| `POST` | /sports/<name>              | No filters      |
+| Method | URL             | Filters         |
+|--------|-----------------|-----------------|
+| `POST` | /sports/{name}  | No filters      |
 
 > **200 OK** | curl --location --request POST 'http://127.0.0.1:5000/sports/VOLEYBALL' \
 --header 'Authorization: Bearer <access_token>' \
@@ -123,6 +123,8 @@ technical888/
     "slug": "VOLEYBALL",
     "active": true
 }'
+
+
 ```json
 {
     "name": "VOLEYBALL",
@@ -145,3 +147,56 @@ technical888/
 }
  ```
 
+ - Update or new sport
+
+| Method | URL             | Filters         |
+|--------|-----------------|-----------------|
+| `PUT`  | /sports/{name}  | No filters      |
+
+> **200 OK** | curl --location --request PUT 'http://127.0.0.1:5000/sports/VOLEYBALL' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "VOLEYBALL",
+    "slug": "VOLEYBALL888",
+    "active": 1
+}'
+
+```json
+{
+    "name": "VOLEYBALL",
+    "slug": "VOLEYBALL888",
+    "active": 1
+}
+ ```
+> **201 CREATED** | curl --location --request PUT 'http://127.0.0.1:5000/sports/VOLEYBALL888' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "VOLEYBALL888",
+    "slug": "VOLEYBALL888",
+    "active": 1
+}'
+
+```json
+{
+    "name": "VOLEYBALL888",
+    "slug": "VOLEYBALL888",
+    "active": true
+}
+ ```
+
+ - Delete (inactive) Sport
+
+| Method   | URL             | Filters         |
+|----------|-----------------|-----------------|
+| `DELETE` | /sports/{name}  | No filters      |
+
+> **200 OK** | curl --location --request DELETE 'http://127.0.0.1:5000/sports/VOLEYBALL888' \
+--header 'Authorization: Bearer <access_token>'
+
+```json
+{
+    "message": "Sport inactivate"
+}
+ ```
