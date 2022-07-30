@@ -67,10 +67,9 @@ technical888/
     ```
     
 # API Documentation
+# Sports
 
-## Sports
-
-- Return all sports
+### [GET] Return sports with filters
 
 | Method        | URL                         | Filters         | Authorization |
 |---------------|-----------------------------|-----------------|---------------|
@@ -90,7 +89,7 @@ technical888/
  } 
  ```
  
- - Return just one sport
+### [GET] Return specific sport
 
 | Method        | URL            | Filters         | Authorization |
 |---------------|----------------|-----------------|---------------|
@@ -113,7 +112,7 @@ technical888/
 }
  ```
 
- - Insert new sport
+### [POST] Insert new sports
 
 | Method | URL             | Filters         | Authorization |
 |--------|-----------------|-----------------|---------------|
@@ -151,7 +150,7 @@ technical888/
 }
  ```
 
- - Update or new sport
+### [PUT] Update or add new sport
 
 | Method | URL             | Filters         | Authorization |
 |--------|-----------------|-----------------|---------------|
@@ -190,7 +189,7 @@ technical888/
 }
  ```
 
- - Delete (inactive) Sport
+### [DELETE] Delete (inactive) sport
 
 | Method   | URL             | Filters         | Authorization |
 |----------|-----------------|-----------------|---------------|
@@ -207,7 +206,7 @@ technical888/
 
 ## Events
 
-- Return all events
+### [GET] Return events with filters
 
 | Method | URL     | Filters               | Authorization |
 |--------|---------|-----------------------|---------------|
@@ -271,8 +270,8 @@ technical888/
     ]
 }
  ```
- 
- - Return specific event
+
+### [GET] Return specific event
 
 
 | Method        | URL                    | Filters         | Authorization |
@@ -300,8 +299,7 @@ technical888/
     "message": "Event name Nadal ax Rafael not found."
 }
  ```
-
- - Insert new event
+### [POST] Insert new event
 
 | Method | URL                    | Filters         | Authorization |
 |--------|------------------------|-----------------|---------------|
@@ -349,7 +347,7 @@ technical888/
 }
  ```
 
- - Update or new Events
+### [PUT] Update or add new events
 
 | Method | URL                    | Filters         | Authorization |
 |--------|------------------------|-----------------|---------------|
@@ -407,7 +405,7 @@ technical888/
 }
  ```
 
- - Delete (inactive) Event
+### [DELETE] Delete (inactive) Event
 
 | Method   | URL                    | Filters         | Authorization |
 |----------|------------------------|-----------------|---------------|
@@ -424,7 +422,7 @@ technical888/
 
 ## Selections
 
-- Return selections
+### [GET] Return selections with filters
 
 | Method | URL         | Filters                  | Authorization |
 |--------|-------------|--------------------------|---------------|
@@ -459,9 +457,8 @@ technical888/
     ]
 }
  ```
- 
- - Return specific selection
 
+### [GET] Return specific selection
 
 | Method        | URL                        | Filters         | Authorization |
 |---------------|----------------------------|-----------------|---------------|
@@ -486,7 +483,7 @@ technical888/
 }
  ```
 
- - Insert new selection
+### [POST] Insert new selection
 
 | Method | URL                        | Filters         | Authorization |
 |--------|----------------------------|-----------------|---------------|
@@ -528,7 +525,7 @@ technical888/
 }
  ```
 
- - Update or new selection
+### [PUT] Update or add new selection
 
 | Method | URL                        | Filters         | Authorization |
 |--------|----------------------------|-----------------|---------------|
@@ -575,7 +572,7 @@ technical888/
 }
  ```
 
- - Delete (inactive) Selection
+### [DELETE] Delete (inactive) Selection
 
 | Method   | URL                        | Filters         | Authorization |
 |----------|----------------------------|-----------------|---------------|
