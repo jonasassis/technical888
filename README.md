@@ -2,6 +2,7 @@
 
 In this document, you can find details about **FILES**, **INSTALL INSTRUCTIONS** and **API documentation**.
 
+[Install and run locally](README.md#install-and-run-locally)
 
 # Project
 
@@ -17,6 +18,32 @@ This code is composed of two different solutions:
 **REST Application**
 
 This project consists of a sportsbook product which is responsible for managing **sports**, **events** and **selections**.
+```
+technical888/
+    ├── models
+            ├── __init__.py
+            ├── event.py
+            ├── selection.py
+            ├── sport.py
+            ├── user.py
+    ├── resources
+            ├── __init__.py
+            ├── displays.py
+            ├── event.py
+            ├── events.py
+            ├── selection.py
+            ├── selections.py
+            ├── sport.py
+            ├── sports.py
+            ├── user.py
+    ├── tests
+            ├── test_api.py
+    ├── app.py                      # Flask() object
+    ├── blacklist.py                # Register logout access token   
+    ├── database.db
+    ├── requirements.txt
+    ├── sql_alchemy.py
+```
 
 ## Install and run locally
 
