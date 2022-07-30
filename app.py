@@ -27,12 +27,14 @@ jwt = JWTManager(app)
 def create_database():
     db.create_all()
 
+
 @jwt.token_in_blocklist_loader
-def verifica_blacklist(self, token):
+def check_blacklist(self, token):
     return token['jti'] in BLACKLIST
 
+
 @jwt.revoked_token_loader
-def token_de_acesso_invalidado():
+def access_token_invalid(self, BLACKLIST):
     return jsonify({'message': 'You have been logged out'}), 401
 
 

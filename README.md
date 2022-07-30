@@ -4,6 +4,7 @@ In this document, you can find details about **FILES**, **INSTALL INSTRUCTIONS**
 
 - [Install and run locally](README.md#install-and-run-locally) <br>
 - [API Documentation](README.md#api-documentation)
+- - [Users](README.md#users)
 - - [Sports](README.md#sports)
 - - [Events](README.md#events)
 - - [Selections](README.md#selections)
@@ -67,6 +68,78 @@ technical888/
     ```
     
 # API Documentation
+# Users
+
+### [GET] Return specific user
+
+| Method        | URL               | Filters | Authorization |
+|---------------|-------------------|---------|---------------|
+| `GET`         | /user/< id_user > | NO      | NO            |
+
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/user/1'
+
+```json
+{
+    "user_id": 1,
+    "login": "jonas"
+}
+ ```
+
+### [POST] Insert new user
+
+| Method | URL        | Filters         | Authorization |
+|--------|------------|-----------------|---------------|
+| `POST` | /register  | No filters      | Required      |
+
+> **201 CREATED** | curl --request POST 'http://127.0.0.1:5000/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "login": "jonas",
+    "password": "1234"
+}''
+```json
+{
+    "message": "Login jonas888 created :) ."
+}
+ ```
+
+### [POST] Login user (generate access-token)
+
+| Method | URL    | Filters         | Authorization |
+|--------|--------|-----------------|---------------|
+| `POST` | /login | No filters      | Required      |
+
+> **200 OK** | curl --request POST 'http://127.0.0.1:5000/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "login": "jonas",
+    "password": "1234"
+}''
+```json
+{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTIwMjg4MywianRpIjoiOTkyMmY1YTktN2NkNi00M2YyLTk5ZjctYTY5ZGQ1M2RhM2Q1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5MjAyODgzLCJleHAiOjE2NTkyMDM3ODN9.u2KOj4gHXGPPg1TElU0QaF85fZjUz5KnkAZJGUQUFuo"
+}
+ ```
+
+### [POST] Logout user (insert access-token in blacklist)
+
+| Method | URL     | Filters         | Authorization |
+|--------|---------|-----------------|---------------|
+| `POST` | /logout | No filters      | Required      |
+
+> **200 OK** | curl --request POST 'http://127.0.0.1:5000/logout' \
+--header 'Authorization: Bearer <access_token>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "login": "jonas",
+    "password": "1234"
+}''
+```json
+{
+    "message": "Logged out successfully ."
+}
+ ```
+
 # Sports
 
 ### [GET] Return sports with filters
