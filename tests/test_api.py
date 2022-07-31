@@ -1,11 +1,6 @@
 import unittest
 import requests
 import random
-import config
-
-sport = "a"
-event = "a"
-
 
 class GetAuthorization:
 
@@ -33,8 +28,6 @@ class SportTestCase(unittest.TestCase):
 
     def test_post_sport_201(self):
         params = "SPORT" + str(random.randint(1, 1000))
-        global sport
-        sport = params
         self.sport_post['name'] = params
         self.sport_post['slug'] = params
         resp = requests.post(self.url + "/" + params, json=self.sport_post, headers=GetAuthorization().header)
@@ -48,8 +41,6 @@ class SportTestCase(unittest.TestCase):
 
     def test_delete_sport_200(self):
         params = "/RUGBY"
-        global sport
-        print(sport)
         resp = requests.delete(self.url + params, headers=GetAuthorization().header)
         self.assertEqual(resp.status_code, 200)
 
@@ -68,8 +59,6 @@ class EventTestCase(unittest.TestCase):
 
     def test_get_event_200(self):
         resp = requests.get(self.url)
-        global sport
-        print(sport)
         self.assertEqual(resp.status_code, 200)
 
     # def test_get_event_200(self):

@@ -55,4 +55,4 @@ api.add_resource(Display, '/display')
 if __name__ == '__main__':
     from sql_alchemy import db
     db.init_app(app)
-    app.run(debug=True)
+    app.run(host='0.0.0.0')

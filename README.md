@@ -72,9 +72,9 @@ technical888/
 
 ### [GET] Return specific user
 
-| Method        | URL               | Filters | Authorization |
-|---------------|-------------------|---------|---------------|
-| `GET`         | /user/< id_user > | NO      | NO            |
+| Method        | URL               | Filters    | Authorization |
+|---------------|-------------------|------------|---------------|
+| `GET`         | /user/< id_user > | No filters | NO            |
 
 > **200 OK** | curl --request GET 'http://127.0.0.1:5000/user/1'
 
@@ -89,7 +89,7 @@ technical888/
 
 | Method | URL        | Filters         | Authorization |
 |--------|------------|-----------------|---------------|
-| `POST` | /register  | No filters      | Required      |
+| `POST` | /register  | No filters      | No            |
 
 > **201 CREATED** | curl --request POST 'http://127.0.0.1:5000/register' \
 --header 'Content-Type: application/json' \
@@ -107,7 +107,7 @@ technical888/
 
 | Method | URL    | Filters         | Authorization |
 |--------|--------|-----------------|---------------|
-| `POST` | /login | No filters      | Required      |
+| `POST` | /login | No filters      | No            |
 
 > **200 OK** | curl --request POST 'http://127.0.0.1:5000/login' \
 --header 'Content-Type: application/json' \
