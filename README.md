@@ -66,7 +66,7 @@ technical888/
     ```
 -   Run development server
     ```
-    python run.py
+    python app.py
     ```
     
 ## Build and run docker
