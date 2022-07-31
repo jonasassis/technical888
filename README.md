@@ -55,13 +55,14 @@ technical888/
 
 -   Create python3 virtual environment and activate it
     ```
+    cd technical888
     python3 -m venv venv
     source venv/bin/activate
     ```
     
 -   Install requirements
     ```
-    pip install -r technical888/requirements.txt
+    pip install -r requirements.txt
     ```
 -   Run development server
     ```
