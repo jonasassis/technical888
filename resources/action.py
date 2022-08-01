@@ -27,3 +27,24 @@ class StartEvent(Resource):
         except(Exception,):
             return {'message': 'An internal error ocurred trying to update event'}, 500
         return {'message': 'Event ' + name + ' started'}, 200
+
+
+class StartEvents(Resource):
+
+    @jwt_required()
+    def post(self):
+
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        query = "UPDATE event SET status = 'Started', " \
+                "actual_start =  DATETIME() " \
+                "WHERE scheduled_start <= DATETIME() "
+
+        try:
+            cursor.execute(query)
+            conn.commit()
+            cursor.close()
+        except(Exception,):
+            return {'message': 'An internal error ocurred trying to update event'}, 500
+        return {'message': 'Events started'}, 200

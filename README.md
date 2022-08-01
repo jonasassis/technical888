@@ -5,6 +5,7 @@ In this document, you can find details about **FILES**, **INSTALL INSTRUCTIONS**
 - [Install and run locally](README.md#install-and-run-locally) <br>
 - [Build and run docker](README.md#build-and-run-docker)
 - [API Documentation](README.md#api-documentation)
+- - [Action](README.md#action)
 - - [Users](README.md#users)
 - - [Sports](README.md#sports)
 - - [Events](README.md#events)
@@ -13,7 +14,7 @@ In this document, you can find details about **FILES**, **INSTALL INSTRUCTIONS**
 
 # Project
 
-**FILE:** [exercise1](exercise1.py)
+**FILE:** [Internal Node Exercise](exercise1.py)
 
 This code is composed of two different solutions:
 ```
@@ -154,6 +155,36 @@ technical888/
 ```json
 {
     "message": "Logged out successfully ."
+}
+ ```
+
+# Action
+
+### [POST] Started event
+
+| Method | URL                         | Filters    | Authorization |
+|--------|-----------------------------|------------|---------------|
+| `POST` | /startevent/{event}/{sport} | No filters | Required      |
+
+> **201 CREATED** | curl --request POST 'http://127.0.0.1:5000/startevent/Internazionale x Liverpol/FOOTBALL' \
+--header 'Authorization: Bearer <access_token>'
+```json
+{
+    "message": "Event Internazionale x Liverpol started"
+}
+ ```
+
+### [POST] Started events less than datetime now
+
+| Method | URL            | Filters    | Authorization |
+|--------|----------------|------------|---------------|
+| `POST` | /startevents   | No filters | Required      |
+
+> **201 CREATED** | curl --request POST 'http://127.0.0.1:5000/startevents' \
+--header 'Authorization: Bearer <access_token>'
+```json
+{
+    "message": "Event Internazionale x Liverpol started"
 }
  ```
 

@@ -8,7 +8,7 @@ from resources.selection import Selection
 from resources.selections import Selections
 from resources.user import User, UserRegister, UserLogin, UserLogout
 from resources.displays import SportsMin, EventsSports, Display, EventsMin
-from resources.action import StartEvent
+from resources.action import StartEvent, StartEvents
 from flask_jwt_extended import JWTManager
 from blacklist import BLACKLIST
 
@@ -58,6 +58,7 @@ api.add_resource(EventsMin, '/eventsmin')
 api.add_resource(EventsSports, '/events/sport')
 api.add_resource(Display, '/display')
 api.add_resource(StartEvent, '/startevent/<string:name>/<string:sport>')
+api.add_resource(StartEvents, '/startevents')
 
 if __name__ == '__main__':
     from sql_alchemy import db
