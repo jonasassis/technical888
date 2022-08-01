@@ -11,21 +11,29 @@ class Events(Resource):
 
         path_paramns = reqparse.RequestParser()
         path_paramns.add_argument('name', type=str)
-        path_paramns.add_argument('slug', type=str)
         path_paramns.add_argument('active', type=inputs.boolean)
-        path_paramns.add_argument('type', type=str)
+        path_paramns.add_argument('scheduled_start_min', type=str)
+        path_paramns.add_argument('scheduled_start_max', type=str)
         path_paramns.add_argument('sport', type=str)
         path_paramns.add_argument('status', type=str)
-        path_paramns.add_argument('scheduled_start', type=str)
-        path_paramns.add_argument('actual_start', type=str)
         data = path_paramns.parse_args()
 
-        data = {key: data[key] for key in data if data[key] is not None}
+        data = {key: data[key] for key in data if data[key] is not None and data[key] != ""}
 
         where = ""
 
+        if data.get('name'):
+            where += "name LIKE ?"
+
         if data.get('active') is not None:
+            if where != "":
+                where += " and "
             where += "active = ?"
+
+        if data.get('scheduled_start_min') and data.get('scheduled_start_max'):
+            if where != "":
+                where += " and "
+            where += 'scheduled_start BETWEEN ? AND ? '
 
         if data.get('sport'):
             if where != "":

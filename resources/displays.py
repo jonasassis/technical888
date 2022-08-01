@@ -74,25 +74,69 @@ class SportsMin(Resource):
         cursor = conn.cursor()
 
         path_paramns = reqparse.RequestParser()
-        path_paramns.add_argument('minimum', type=int)
+        path_paramns.add_argument('min_events', type=int, default=0)
         data = path_paramns.parse_args()
 
         data = {key: data[key] for key in data if data[key] is not None}
 
-        query = "SELECT s.name, count(*) " \
+        query = "SELECT s.name, s.slug, s.active, count(*) " \
                 "FROM sport s INNER JOIN " \
                 "event e ON s.name = e.sport " \
-                "GROUP BY s.name " \
+                "WHERE e.active = 1 " \
+                "GROUP BY s.name, s.slug, s.active " \
                 "HAVING count(*) >= ?"
 
         tupla = tuple([data[key] for key in data])
         result = cursor.execute(query, tupla)
 
-        selections = []
+        sports = []
         for line in result:
-            selections.append({'name': line[0]})
+            sports.append({'name': line[0], 'slug': line[1], 'active': line[2]})
 
-        return {'sport': selections}
+        return {'sport': sports}
+
+
+class EventsMin(Resource):
+
+    def get(self):
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        path_paramns = reqparse.RequestParser()
+        path_paramns.add_argument('min_selections', type=int, default=0)
+        data = path_paramns.parse_args()
+
+        data = {key: data[key] for key in data if data[key] is not None}
+
+        query = "SELECT e.name, e.slug, e.active, " \
+                "e.type, e.sport, e.status, " \
+                "e.scheduled_start, e.actual_start, " \
+                "count(*) " \
+                "FROM event e INNER JOIN " \
+                "selection s ON e.name = s.event " \
+                "WHERE s.active = 1 " \
+                "GROUP BY e.name, e.slug, e.active, " \
+                "e.type, e.sport, e.status, " \
+                "e.scheduled_start, e.actual_start " \
+                "HAVING count(*) >= ?"
+
+        tupla = tuple([data[key] for key in data])
+        result = cursor.execute(query, tupla)
+
+        events = []
+        for line in result:
+            events.append({
+                        'name': line[0],
+                        'slug': line[1],
+                        'active': line[2],
+                        'type': line[3],
+                        'sport': line[4],
+                        'status': line[5],
+                        'scheduled_start': line[6],
+                        'actual_start': line[7]
+                    })
+
+        return {'events': events}
 
 
 class EventsSports(Resource):

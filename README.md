@@ -9,6 +9,7 @@ In this document, you can find details about **FILES**, **INSTALL INSTRUCTIONS**
 - - [Sports](README.md#sports)
 - - [Events](README.md#events)
 - - [Selections](README.md#selections)
+- - [Displays](README.md#displays) - General requests
 
 # Project
 
@@ -297,55 +298,16 @@ technical888/
 
 ### [GET] Return events with filters
 
-| Method | URL     | Filters               | Authorization |
-|--------|---------|-----------------------|---------------|
-| `GET`  | /events | name \ active \ sport | No            |
+| Method | URL     | Possible filters                                                           | Authorization  |
+|--------|---------|----------------------------------------------------------------------------|----------------|
+| `GET`  | /events | name \ active \ scheduled_start_min \ scheduled_start_max \ sport \ status | No             |
 
-> **200 OK** | curl --request GET 'http://127.0.0.1:5000/events'
+
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/events?name=%x%&active=0&scheduled_start_min=2022-07-30&scheduled_start_max=2022-09-30&sport=TENNIS'
 
 ```json
 {
     "events": [
-        {
-            "name": "Internazionale x Liverpol",
-            "slug": "EUROPE LEAGUE",
-            "active": 1,
-            "type": "preplay",
-            "sport": "FOOTBALL",
-            "status": "Pending",
-            "scheduled_start": "2022-07-30 20:00:00.000000",
-            "actual_start": null
-        },
-        {
-            "name": "Barcelona x Real Madrid",
-            "slug": "EUROPE LEAGUE",
-            "active": 1,
-            "type": "preplay",
-            "sport": "FOOTBALL",
-            "status": "Pending",
-            "scheduled_start": "2022-07-30 20:00:00.000000",
-            "actual_start": null
-        },
-        {
-            "name": "Chelsea x Real Madrid",
-            "slug": "EUROPE LEAGUE",
-            "active": 1,
-            "type": "preplay",
-            "sport": "FOOTBALL",
-            "status": "Pending",
-            "scheduled_start": "2022-07-30 20:00:00.000000",
-            "actual_start": null
-        },
-        {
-            "name": "Nadal x Rafael",
-            "slug": "Nadal x Rafael 316",
-            "active": 1,
-            "type": "preplay",
-            "sport": "TENNIS",
-            "status": "Pending",
-            "scheduled_start": "2022-08-30 20:00:00.000000",
-            "actual_start": null
-        },
         {
             "name": "Mick x Fiona",
             "slug": "WORLD TENNIS",
@@ -355,6 +317,16 @@ technical888/
             "status": "Pending",
             "scheduled_start": "2022-08-30 20:00:00.000000",
             "actual_start": null
+        },
+        {
+            "name": "Oliveira x Michael",
+            "slug": "WORLD TENNIS",
+            "active": 0,
+            "type": "preplay",
+            "sport": "TENNIS",
+            "status": "Started",
+            "scheduled_start": "2022-08-30 20:00:00.000000",
+            "actual_start": "2022-07-30 16:02:21.503674"
         }
     ]
 }
@@ -673,5 +645,214 @@ technical888/
 ```json
 {
     "message": "Selection inactivate"
+}
+ ```
+
+## Displays
+
+### [GET] Return all information in database (sports, events and selections)
+
+| Method | URL      | Filters | Authorization |
+|--------|----------|---------|---------------|
+| `GET`  | /display | active  | No            |
+
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/display'
+
+```json
+{
+    "result": [
+        {
+            "name": "FOOTBALL",
+            "slug": "FOOTBALL783",
+            "active": 1,
+            "events": [
+                {
+                    "name": "Internazionale x Liverpol",
+                    "slug": "EUROPE LEAGUE",
+                    "active": 1,
+                    "type": "preplay",
+                    "sport": "FOOTBALL",
+                    "status": "Pending",
+                    "scheduled_start": "2022-07-30 20:00:00.000000",
+                    "actual_start": null,
+                    "selections": [
+                        {
+                            "name": "1",
+                            "event": "Internazionale x Liverpol",
+                            "price": 1.2,
+                            "active": 1,
+                            "outcome": "Unsettled"
+                        },
+                        {
+                            "name": "2",
+                            "event": "Internazionale x Liverpol",
+                            "price": 4.9,
+                            "active": 1,
+                            "outcome": "Unsettled"
+                        },
+                        {
+                            "name": "X",
+                            "event": "Internazionale x Liverpol",
+                            "price": 8.0,
+                            "active": 1,
+                            "outcome": "Unsettled"
+                        }
+                    ]
+                },
+                {
+                    "name": "Barcelona x Real Madrid",
+                    "slug": "EUROPE LEAGUE",
+                    "active": 1,
+                    "type": "preplay",
+                    "sport": "FOOTBALL",
+                    "status": "Pending",
+                    "scheduled_start": "2022-07-30 20:00:00.000000",
+                    "actual_start": null,
+                    "selections": [
+                        {
+                            "name": "X",
+                            "event": "Barcelona x Real Madrid",
+                            "price": 3.7,
+                            "active": 1,
+                            "outcome": "Unsettled"
+                        }
+                    ]
+                },
+                {
+                    "name": "Chelsea x Real Madrid",
+                    "slug": "EUROPE LEAGUE",
+                    "active": 1,
+                    "type": "preplay",
+                    "sport": "FOOTBALL",
+                    "status": "Pending",
+                    "scheduled_start": "2022-07-30 20:00:00.000000",
+                    "actual_start": null,
+                    "selections": []
+                }
+            ]
+        },
+        {
+            "name": "BASKETBALL",
+            "slug": "BASKETBALL",
+            "active": 1,
+            "events": []
+        },
+        {
+            "name": "HORSE RACING",
+            "slug": "HORSE RACING",
+            "active": 1,
+            "events": []
+        }
+    ]
+}
+ ```
+
+### [GET] Return all events with your specific sport
+
+| Method | URL           | Filters                              | Authorization |
+|--------|---------------|--------------------------------------|---------------|
+| `GET`  | /events/sport | datemin \ datemax \ minimum \ status | No            |
+
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/events/sport?datemin=2022-07-20&datemax=2022-07-31&minimum=1&status=Pending'
+
+```json
+{
+    "sport": [
+        {
+            "FOOTBALL": [
+                {
+                    "name": "Internazionale x Liverpol",
+                    "slug": "EUROPE LEAGUE",
+                    "active": 1,
+                    "type": "preplay",
+                    "sport": "FOOTBALL",
+                    "status": "Pending",
+                    "scheduled_start": "2022-07-30 20:00:00.000000",
+                    "actual_start": null
+                },
+                {
+                    "name": "Barcelona x Real Madrid",
+                    "slug": "EUROPE LEAGUE",
+                    "active": 1,
+                    "type": "preplay",
+                    "sport": "FOOTBALL",
+                    "status": "Pending",
+                    "scheduled_start": "2022-07-30 20:00:00.000000",
+                    "actual_start": null
+                },
+                {
+                    "name": "Chelsea x Real Madrid",
+                    "slug": "EUROPE LEAGUE",
+                    "active": 1,
+                    "type": "preplay",
+                    "sport": "FOOTBALL",
+                    "status": "Pending",
+                    "scheduled_start": "2022-07-30 20:00:00.000000",
+                    "actual_start": null
+                }
+            ]
+        }
+    ]
+}
+ ```
+
+### [GET] Return all sports with a minimum number of active events
+
+| Method | URL          | Filters    | Authorization |
+|--------|--------------|------------|---------------|
+| `GET`  | /sportsmin   | min_events | No            |
+
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/sportsmin?min_events=3'
+
+```json
+{
+    "sport": [
+        {
+            "name": "FOOTBALL",
+            "slug": "FOOTBALL783",
+            "active": 1
+        },
+        {
+            "name": "TENNIS",
+            "slug": "TENNIS",
+            "active": 0
+        }
+    ]
+}
+ ```
+
+
+### [GET] Return all events with a minimum number of active selections
+
+| Method | URL          | Filters        | Authorization |
+|--------|--------------|----------------|---------------|
+| `GET`  | /eventsmin   | min_selections | No            |
+
+> **200 OK** | curl --request GET 'http://127.0.0.1:5000/eventsmin?min_selections=2'
+
+```json
+{
+    "events": [
+        {
+            "name": "Barcelona x Real Madrid",
+            "slug": "EUROPE LEAGUE",
+            "active": 1,
+            "type": "preplay",
+            "sport": "FOOTBALL",
+            "status": "Pending",
+            "scheduled_start": "2022-07-30 20:00:00.000000",
+            "actual_start": null
+        },
+        {
+            "name": "Internazionale x Liverpol",
+            "slug": "EUROPE LEAGUE",
+            "active": 1,
+            "type": "preplay",
+            "sport": "FOOTBALL",
+            "status": "Pending",
+            "scheduled_start": "2022-07-30 20:00:00.000000",
+            "actual_start": null
+        }
+    ]
 }
  ```

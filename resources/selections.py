@@ -10,9 +10,7 @@ class Selections(Resource):
         cursor = conn.cursor()
 
         path_paramns = reqparse.RequestParser()
-        path_paramns.add_argument('name', type=str)
         path_paramns.add_argument('event', type=str)
-        path_paramns.add_argument('price', type=str)
         path_paramns.add_argument('active', type=inputs.boolean)
         path_paramns.add_argument('outcome', type=str)
         data = path_paramns.parse_args()

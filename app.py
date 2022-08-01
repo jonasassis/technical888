@@ -7,7 +7,8 @@ from resources.events import Events
 from resources.selection import Selection
 from resources.selections import Selections
 from resources.user import User, UserRegister, UserLogin, UserLogout
-from resources.displays import SportsMin, EventsSports, Display
+from resources.displays import SportsMin, EventsSports, Display, EventsMin
+from resources.action import StartEvent
 from flask_jwt_extended import JWTManager
 from blacklist import BLACKLIST
 
@@ -16,8 +17,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'DontTellAnyone'
 app.config['JWT_BLACKLIST_ENABLED'] = True
-app.config['SWAGGER'] = {"title": "Swagger-UI"}
-
+app.config['PROPAGATE_EXCEPTIONS'] = True
 
 api = Api(app)
 jwt = JWTManager(app)
@@ -31,6 +31,11 @@ def create_database():
 @jwt.token_in_blocklist_loader
 def check_blacklist(self, token):
     return token['jti'] in BLACKLIST
+
+
+@jwt.expired_token_loader
+def my_expired_token_callback(jwt_header, jwt_payload):
+    return jsonify({'message': 'Token expired'}), 401
 
 
 @jwt.revoked_token_loader
@@ -49,10 +54,13 @@ api.add_resource(UserRegister, '/register')
 api.add_resource(UserLogin, '/login')
 api.add_resource(UserLogout, '/logout')
 api.add_resource(SportsMin, '/sportsmin')
+api.add_resource(EventsMin, '/eventsmin')
 api.add_resource(EventsSports, '/events/sport')
 api.add_resource(Display, '/display')
+api.add_resource(StartEvent, '/startevent/<string:name>/<string:sport>')
 
 if __name__ == '__main__':
     from sql_alchemy import db
+
     db.init_app(app)
     app.run(host='0.0.0.0')

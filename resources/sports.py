@@ -11,11 +11,10 @@ class Sports(Resource):
 
         path_paramns = reqparse.RequestParser()
         path_paramns.add_argument('name', type=str)
-        path_paramns.add_argument('slug', type=str)
         path_paramns.add_argument('active', type=inputs.boolean)
         data = path_paramns.parse_args()
 
-        data = {key: data[key] for key in data if data[key] is not None}
+        data = {key: data[key] for key in data if data[key] is not None and data[key] != ""}
 
         where = ""
 
