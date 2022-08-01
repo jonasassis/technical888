@@ -3,6 +3,7 @@
 In this document, you can find details about **FILES**, **INSTALL INSTRUCTIONS** and **API documentation**.
 
 - [Install and run locally](README.md#install-and-run-locally) <br>
+- [Build and run docker](README.md#build-and-run-docker)
 - [API Documentation](README.md#api-documentation)
 - - [Users](README.md#users)
 - - [Sports](README.md#sports)
@@ -54,18 +55,33 @@ technical888/
 
 -   Create python3 virtual environment and activate it
     ```
+    cd technical888
     python3 -m venv venv
     source venv/bin/activate
     ```
     
 -   Install requirements
     ```
-    pip install -r technical888/requirements.txt
+    pip install -r requirements.txt
     ```
 -   Run development server
     ```
-    python run.py
+    python app.py
     ```
+    
+## Build and run docker
+
+-   Build image
+    ```
+    docker build -t webapi -f Dockerfile .
+    ```
+    
+-   Run
+    ```
+    docker run -p 5000:5000 webapi
+    ```
+    
+
     
 # API Documentation
 # Users
