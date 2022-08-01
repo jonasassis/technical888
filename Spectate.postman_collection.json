@@ -1,0 +1,919 @@
+{
+	"info": {
+		"_postman_id": "b5b892e9-8bfe-4ee5-b9ac-4fcdc944a1ac",
+		"name": "Spectate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sports",
+			"item": [
+				{
+					"name": "/sports",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/sports",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sports"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "A",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/sports/{name}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/sports/BASKETsBALL",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sports",
+								"BASKETsBALL"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/sports/{name}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTM3NDYxMSwianRpIjoiMWI3NGZkNWUtZGZjMC00MWUwLWI3OWItYjQ3YzJmZTk4ZjEwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5Mzc0NjExLCJleHAiOjE2NTkzNzU1MTF9.qOuj_VgjBa4b1R3lAIGRZTU2PPkcRbHv0t20QyD-Zuo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"HORSE RACING\",\n    \"slug\": \"HORSE RACING\",\n    \"active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/sports/TENNIS",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sports",
+								"TENNIS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/sports/{name}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTM4MTY1NCwianRpIjoiYzJkMGE0ZjItZThjNS00OTMwLWJhZjYtYmY1NjlhOTAzZTM1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5MzgxNjU0LCJleHAiOjE2NTkzODI1NTR9.aS5zlkE_kwBWB6MC9Nl5Ar49btWO4OTZewef_ila_oQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"name\": \"TENNIS\",\n            \"slug\": \"TENNIS\",\n            \"active\": 1\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/sports/TENNIS",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sports",
+								"TENNIS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/sports/{name}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTM4MTY1NCwianRpIjoiYzJkMGE0ZjItZThjNS00OTMwLWJhZjYtYmY1NjlhOTAzZTM1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5MzgxNjU0LCJleHAiOjE2NTkzODI1NTR9.aS5zlkE_kwBWB6MC9Nl5Ar49btWO4OTZewef_ila_oQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/sports/HORSE RACING",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sports",
+								"HORSE RACING"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "events",
+			"item": [
+				{
+					"name": "/events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/events",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"events"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "%x%",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "scheduled_start_min",
+									"value": "2022-07-30",
+									"disabled": true
+								},
+								{
+									"key": "scheduled_start_max",
+									"value": "2022-09-30",
+									"disabled": true
+								},
+								{
+									"key": "sport",
+									"value": "TENNIS",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "Started",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/events/{name}/{sport}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/events/Hamilton/CAR RACING",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"events",
+								"Hamilton",
+								"CAR RACING"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Barcelona x Real Madrid",
+									"disabled": true
+								},
+								{
+									"key": "event",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/events/{name}/{sport}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTM4MjYwMSwianRpIjoiMmM1MmI2ZWItOWM3YS00OWM4LWI2YzItMzdjNmYwYTE1NDM2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5MzgyNjAxLCJleHAiOjE2NTkzODM1MDF9.mXI_b1a4WZWR8wwQOp6FlfmkU_xb2rTqPAPh62Dcjjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Lakers x Bulls\",\n    \"slug\": \"NBA\",\n    \"active\": 1,\n    \"type\": \"preplay\",\n    \"sport\": \"BASKETBALL\",\n    \"status\": \"Pending\",\n    \"scheduled_start\": \"2022-08-15 20:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/events/Lakers x Bulls/BASKETBALL",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"events",
+								"Lakers x Bulls",
+								"BASKETBALL"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/startevent",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTM4NDcxNiwianRpIjoiOTFmODZlYzMtZDFlZS00NGFlLWEwZjktNThkMTZjZDVmMzRmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5Mzg0NzE2LCJleHAiOjE2NTkzODU2MTZ9.UWZu3rgYyFsbiYIdTx3GL3duwFlquBWiuhqZcQ8YNIw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/startevent/Internazionale x Liverpol/FOOTBALL",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"startevent",
+								"Internazionale x Liverpol",
+								"FOOTBALL"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/startevents",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTM4NDcxNiwianRpIjoiOTFmODZlYzMtZDFlZS00NGFlLWEwZjktNThkMTZjZDVmMzRmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5Mzg0NzE2LCJleHAiOjE2NTkzODU2MTZ9.UWZu3rgYyFsbiYIdTx3GL3duwFlquBWiuhqZcQ8YNIw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/startevents",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"startevents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/events/{name}/{sport}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTAzNTYxMSwianRpIjoiZWU0OTdkNjItNDEzMS00NmJmLWEwMmYtZDdkNDRhM2M4MDVhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5MDM1NjExLCJleHAiOjE2NTkwMzY1MTF9.6N87pEkinj2SYuX5KP7_5NkJtXPKP_QO8bJlQ9R9baY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Oliveira x Michael\",\n    \"slug\": \"WORLD TENNIS\",\n    \"active\": 1,\n    \"type\": \"preplay\",\n    \"sport\": \"TENNIS\",\n    \"status\": \"Started\",\n    \"scheduled_start\": \"2022-08-30 20:00:00\",\n    \"actual_start\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/events/Oliveira x Michael/TENNIS",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"events",
+								"Oliveira x Michael",
+								"TENNIS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/events/{name}/{sport}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTAzNzQwOCwianRpIjoiNDIzOWIyMWUtMTE1Ni00NjdhLTkwNGMtNmM3ZjZlNzYwODEwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5MDM3NDA4LCJleHAiOjE2NTkwMzgzMDh9._ajrMiGoa2GxEC-Yzqm4WyveZf-9iczRo0VG87VAcxw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/events/Oliveira x Michael/TENNIS",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"events",
+								"Oliveira x Michael",
+								"TENNIS"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "selections",
+			"item": [
+				{
+					"name": "/selections",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/selections?event=Ham%",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"selections"
+							],
+							"query": [
+								{
+									"key": "event",
+									"value": "Ham%"
+								},
+								{
+									"key": "outcome",
+									"value": "Unsettled",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "True",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/selections/{name}/{event}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/selections/SX/Internazionale x Liverpol",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"selections",
+								"SX",
+								"Internazionale x Liverpol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/selections/{name}/{event}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTM4MjYwMSwianRpIjoiMmM1MmI2ZWItOWM3YS00OWM4LWI2YzItMzdjNmYwYTE1NDM2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5MzgyNjAxLCJleHAiOjE2NTkzODM1MDF9.mXI_b1a4WZWR8wwQOp6FlfmkU_xb2rTqPAPh62Dcjjk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"2\",\n    \"event\": \"Lakers x Bulls\",\n    \"price\": 3,\n    \"active\": 1,\n    \"outcome\": \"Unsettled\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/selections/2/Lakers x Bulls",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"selections",
+								"2",
+								"Lakers x Bulls"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/selections/{name}/{event}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTM4MTY1NCwianRpIjoiYzJkMGE0ZjItZThjNS00OTMwLWJhZjYtYmY1NjlhOTAzZTM1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5MzgxNjU0LCJleHAiOjE2NTkzODI1NTR9.aS5zlkE_kwBWB6MC9Nl5Ar49btWO4OTZewef_ila_oQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"1\",\n    \"event\": \"Internazionale x Liverpol\",\n    \"price\": 4.9,\n    \"active\": 1,\n    \"outcome\": \"Unsettled\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/selections/1/Internazionale x Liverpol",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"selections",
+								"1",
+								"Internazionale x Liverpol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/selections/{name}/{event}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTMxMTI1MywianRpIjoiMThkYzYyNTItMzY2MC00ZjNkLTk3NjEtZDczZmIyZDI4NDJlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5MzExMjUzLCJleHAiOjE2NTkzMTIxNTN9.R52lDhzUAP0f3dZGH0ike8TEssIkCA9VRCTHZGTGR_I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/selections/SX/Internazionale x Liverpol",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"selections",
+								"SX",
+								"Internazionale x Liverpol"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "/user/{user_id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/user/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"spectate\",\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTA0MDM1NiwianRpIjoiZTA4MTNlNDAtNzU5Mi00ZjFhLWE2ODQtZjA2MDFlY2NlYzM4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5MDQwMzU2LCJleHAiOjE2NTkwNDEyNTZ9.LP2s5seyuUMGtfWFuVYC06VJDLrOLmsZLibtRcS4X3c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"jonas\",\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1OTIwMjg4MywianRpIjoiOTkyMmY1YTktN2NkNi00M2YyLTk5ZjctYTY5ZGQ1M2RhM2Q1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU5MjAyODgzLCJleHAiOjE2NTkyMDM3ODN9.u2KOj4gHXGPPg1TElU0QaF85fZjUz5KnkAZJGUQUFuo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "displays",
+			"item": [
+				{
+					"name": "/events/sport",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/events/sport?datemin=2022-07-20&datemax=2022-07-31&minimum=1&status=Pending",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"events",
+								"sport"
+							],
+							"query": [
+								{
+									"key": "datemin",
+									"value": "2022-07-20"
+								},
+								{
+									"key": "datemax",
+									"value": "2022-07-31"
+								},
+								{
+									"key": "minimum",
+									"value": "1"
+								},
+								{
+									"key": "status",
+									"value": "Pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/sportsmin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/sportsmin?min_events=2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sportsmin"
+							],
+							"query": [
+								{
+									"key": "min_events",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/eventsmin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/eventsmin?min_selections=2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"eventsmin"
+							],
+							"query": [
+								{
+									"key": "min_selections",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/display",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/display",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"display"
+							],
+							"query": [
+								{
+									"key": "active",
+									"value": "0",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
