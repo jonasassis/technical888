@@ -1,11 +1,4 @@
-def find_internal_nodes_num(tree):
-    ## distinct with set() removing -1
-    internal_node_count = max(0, len(set(tree)) - 1)
-    return internal_node_count
-
-
 my_tree = [4, 4, 1, 5, -1, 4, 5]
-#my_tree = [9, 5, 5, 5, 3, -1, 2, 3, 1, 1]
 count = 0
 
 
@@ -50,23 +43,21 @@ class TreeNode:
         return count
 
 
-if __name__ == '__main__':
+def find_internal_nodes_num(tree):
+    # distinct with set() removing -1
+    internal_node_count = max(0, len(set(tree)) - 1)
+    return internal_node_count
 
-    ## solution by building a tree
+
+if __name__ == '__main__':
+    # solution by building a tree
     print("## solution by building a tree")
     root_value = my_tree.index(-1)
     root = TreeNode(root_value)
     root.build_tree()
-    #root.print_tree()
+    # root.print_tree()
     print(root.find_internal_nodes_num_with_built_tree())
 
-    
     print("## solution with distinct without building a tree")
-    ## solution with distinct without building a tree
+    # solution with distinct without building a tree
     print(find_internal_nodes_num(my_tree))
-
-
-
-
-
-
