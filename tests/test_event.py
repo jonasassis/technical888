@@ -54,7 +54,7 @@ class EventTestCase(unittest.TestCase):
 
     def test_put_event_no_authorization(self):
         resp = requests.put(self.url + "/Nadal x Rafael/TENNIS", json=self.event_post)
-        self.assertEqual(resp.status_code, 500)
+        self.assertEqual(resp.status_code, 401)
 
     def test_delete_event_inactivate(self):
         params = "/Nadal x Rafael/TENNIS"

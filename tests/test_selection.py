@@ -50,10 +50,10 @@ class EventTestCase(unittest.TestCase):
 
     def test_put_selection_no_authorization(self):
         resp = requests.put(self.url + "/X/Nadal x Rafael", json=self.selection_post)
-        self.assertEqual(resp.status_code, 500)
+        self.assertEqual(resp.status_code, 401)
 
     def test_delete_selection_inactivate(self):
-        params = "/3/Michael x Stace"
+        params = "/X/Michael x Stace"
         resp = requests.delete(self.url + params, headers=GetAuthorization().header)
         self.assertEqual(resp.status_code, 200)
 

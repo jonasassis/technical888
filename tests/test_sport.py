@@ -47,10 +47,12 @@ class SportTestCase(unittest.TestCase):
     def test_put_sport_no_authorization(self):
         self.sport_post['slug'] = "FOOTBALL" + str(random.randint(1, 1000))
         resp = requests.put(self.url + "/FOOTBALL", json=self.sport_post)
-        self.assertEqual(resp.status_code, 500)
+        self.assertEqual(resp.status_code, 401)
 
     def test_delete_sport_inactivate(self):
-        params = "/RUGBY"
+        params = "/HORSE RACING"
+        sport_post = {"name": "HORSE RACING", "slug": "HORSE RACING", "active": 1}
+        requests.post(self.url + params, json=sport_post, headers=GetAuthorization().header)
         resp = requests.delete(self.url + params, headers=GetAuthorization().header)
         self.assertEqual(resp.status_code, 200)
 
