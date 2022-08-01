@@ -103,15 +103,27 @@ class EventsSports(Resource):
         cursor = conn.cursor()
 
         path_paramns = reqparse.RequestParser()
-        path_paramns.add_argument('minimum', type=int)
+        path_paramns.add_argument('datemin', type=str)
+        path_paramns.add_argument('datemax', type=str)
+        path_paramns.add_argument('status', type=str)
+        path_paramns.add_argument('minimum', type=int, default=0)
         data = path_paramns.parse_args()
 
         data = {key: data[key] for key in data if data[key] is not None}
 
+        where = ""
+        if data.get('datemin') and data.get('datemax'):
+            where = 'WHERE scheduled_start BETWEEN ? AND ? '
+
+        if data.get('status'):
+            if where == "":
+                where = 'WHERE status = ? '
+            else:
+                where += 'AND status = ? '
+
         query = "SELECT s.name, count(*) " \
                 "FROM sport s INNER JOIN " \
-                "event e ON s.name = e.sport " \
-                "GROUP BY s.name " \
+                "event e ON s.name = e.sport " + where + "GROUP BY s.name " \
                 "HAVING count(*) >= ?"
 
         tupla = tuple([data[key] for key in data])
@@ -120,7 +132,7 @@ class EventsSports(Resource):
         selections = []
         for line in result:
 
-            query = "SELECT * FROM event WHERE sport = '" + line[0] + "'"
+            query = "SELECT * FROM event WHERE sport = '" + line[0] + "' "
 
             result_events = cursor.execute(query)
 

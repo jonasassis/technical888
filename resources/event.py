@@ -38,7 +38,7 @@ class Event(Resource):
             return event.json(), 200
         return {'message': 'Event name {} not found.'.format(name)}, 404
 
-    #@jwt_required()
+    @jwt_required()
     def post(self, name, sport):
 
         if EventModel.find_event(name, sport):
@@ -52,7 +52,7 @@ class Event(Resource):
             return {'message': 'An internal error ocurred trying to save event'}, 500
         return new_event.json(), 201
 
-    #@jwt_required()
+    @jwt_required()
     def put(self, name, sport):
 
         data = Event.args.parse_args()
@@ -67,7 +67,7 @@ class Event(Resource):
         new_event.save_event()
         return new_event.json(), 201
 
-    #@jwt_required()
+    @jwt_required()
     def delete(self, name, sport):
 
         event = EventModel.find_event(name, sport)

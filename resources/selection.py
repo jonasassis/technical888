@@ -35,7 +35,7 @@ class Selection(Resource):
             return selection.json(), 200
         return {'message': 'Selection name {} not found.'.format(name)}, 404
 
-    #@jwt_required()
+    @jwt_required()
     def post(self, name, event):
 
         data = Selection.args.parse_args()
@@ -50,7 +50,7 @@ class Selection(Resource):
             return {'message': 'An internal error ocurred trying to save Selection'}, 500
         return new_selection.json(), 201
 
-    #@jwt_required()
+    @jwt_required()
     def put(self, name, event):
 
         data = Selection.args.parse_args()
@@ -65,7 +65,7 @@ class Selection(Resource):
         new_selection.save_selection()
         return new_selection.json(), 201
 
-    #@jwt_required()
+    @jwt_required()
     def delete(self, name, event):
 
         selection = SelectionModel.find_selection(name, event)
