@@ -25,7 +25,11 @@ This code is composed of two different solutions:
 
 **REST Application**
 
-This project consists of a sportsbook product which is responsible for managing **sports**, **events** and **selections** with layer for **users** security. **BASIC DATABASE INCLUDED**
+This project consists of a sportsbook product which is responsible for managing **sports**, **events** and **selections** with layer for **users** security. 
+
+**BASIC DATABASE INCLUDED**<br>
+**Spectate.postman_collection.json INCLUDED**
+
 ```
 technical888/
     ├── models
