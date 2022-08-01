@@ -25,7 +25,7 @@ This code is composed of two different solutions:
 
 **REST Application**
 
-This project consists of a sportsbook product which is responsible for managing **sports**, **events** and **selections** with layer for **users** security.
+This project consists of a sportsbook product which is responsible for managing **sports**, **events** and **selections** with layer for **users** security. **BASIC DATABASE INCLUDED**
 ```
 technical888/
     ├── models
@@ -36,6 +36,7 @@ technical888/
             ├── user.py
     ├── resources
             ├── __init__.py
+            ├── action.py
             ├── displays.py
             ├── event.py
             ├── events.py
@@ -45,12 +46,19 @@ technical888/
             ├── sports.py
             ├── user.py
     ├── tests
-            ├── test_api.py
+            ├── test_displays.py
+            ├── test_event.py
+            ├── test_general.py
+            ├── test_selection.py
+            ├── test_sport.py
+            ├── utils.py
     ├── app.py                      # Flask() object
     ├── blacklist.py                # Register logout access token   
     ├── database.db
     ├── requirements.txt
     ├── sql_alchemy.py
+    ├── Dockerfile
+    ├── .dockerignore
 ```
 
 ## Install and run locally
